@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/04.UI/HealthUI.uss?fileID=7433441132597879392&amp;guid=33313ae3990279b4e9245b1c995f25c4&amp;type=3#HealthUI" />
+    <ui:VisualElement class="health-container">
+        <ui:ProgressBar name="hp-bar" title="HP" value="100" highValue="100" />
+    </ui:VisualElement>
+</ui:UXML>

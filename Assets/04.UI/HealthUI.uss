@@ -1,0 +1,11 @@
+.health-container {
+    width: 200px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#hp-bar {
+    width: 200px;
+    height: 20px;
+}
+

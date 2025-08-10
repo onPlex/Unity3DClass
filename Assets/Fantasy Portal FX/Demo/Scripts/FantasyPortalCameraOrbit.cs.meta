@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2c35e8317e10794438242504d239b307
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 169581
+  packageName: Fantasy Portal FX
+  packageVersion: 1.0
+  assetPath: Assets/Fantasy Portal FX/Demo/Scripts/FantasyPortalCameraOrbit.cs
+  uploadId: 370232

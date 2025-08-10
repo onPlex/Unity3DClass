@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="project://database/Assets/04.UI/PauseMenu.uss?fileID=7433441132597879392&amp;guid=14364b9c3c9dbdc469c7e7cc65b5a576&amp;type=3#PauseMenu" />
+    <ui:VisualElement name="PauseRoot" class="panel pause pause-center">
+        <ui:Label name="Title" text="Paused" class="pause-title" />
+        <ui:Button name="ResumeButton" text="Resume" class="pause-btn" />
+        <ui:Button name="SettingsButton" text="Settings" class="pause-btn" />
+        <ui:Button name="QuitButton" text="Quit to Main" class="pause-btn" />
+    </ui:VisualElement>
+</ui:UXML>
