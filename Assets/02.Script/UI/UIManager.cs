@@ -4,145 +4,145 @@ using System.Collections.Generic;
 
 /// <summary>
 /// UIManager
-/// - ¿©·¯ UXML È­¸é(ÆäÀÌÁö)À» ÇÑ ¹ø¿¡ ÁØºñÇØµÎ°í, ÇÊ¿äÇÒ ¶§ ON/OFF·Î ÀüÈ¯ÇÏ´Â Çãºê.
-/// - ÀåÁ¡: ÀüÈ¯ÀÌ ºü¸£°í(¹Ì¸® ¸Ş¸ğ¸®¿¡ ¿Ã¶ó¿Í ÀÖÀ½), ÄÚµå¿¡¼­ °£´ÜÈ÷ Open/Close/Toggle È£Ãâ¸¸ ÇÏ¸é µÊ.
-/// - ´ÜÁ¡: ¸ğµç ÆäÀÌÁö¸¦ ¹Ì¸® ºÙÀÌ¹Ç·Î ¸Ş¸ğ¸® »ç¿ë·® Áõ°¡. (±Ô¸ğ Ä¿Áö¸é ÀÏºÎ´Â Áö¿¬ ·Îµå·Î ¹Ù²Ù´Â °Ô ÁÁÀ½)
+/// - ì—¬ëŸ¬ UXML í™”ë©´(í˜ì´ì§€)ì„ í•œ ë²ˆì— ë¡œë“œí•˜ê³ , í•„ìš”í•œ í™”ë©´ë§Œ ON/OFFë¡œ ì „í™˜í•˜ëŠ” ë§¤ë‹ˆì €.
+/// - ì¥ì : í™”ë©´ ì „í™˜ ì‹œ ì§€ì—°ì‹œê°„(ë¡œë”©ê³¼ ë©”ëª¨ë¦¬ ë¶€ì¡± ë¬¸ì œ í•´ê²°), ì½”ë“œì—ì„œ ê°„ë‹¨íˆ Open/Close/Toggle í˜¸ì¶œë§Œ í•˜ë©´ ë¨.
+/// - ì¥ì : ëª¨ë“  í™”ë©´ì„ ë¯¸ë¦¬ ë¡œë“œí•˜ë¯€ë¡œ ë©”ëª¨ë¦¬ ì‚¬ìš©ëŸ‰ ì¦ê°€. (í•˜ì§€ë§Œ ì¿ ì…˜ íš¨ê³¼ë¡œ ë¶€ë“œëŸ¬ìš´ ì „í™˜ ê°€ëŠ¥)
 /// </summary>
 public class UIManager : MonoBehaviour
 {
     /// <summary>
-    /// ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
-    /// - ¾À Àü¿ª¿¡¼­ Á¢±ÙÀÌ ½¬¿öÁü.
-    /// - UI´Â º¸Åë Àü¿ª Çãºê°¡ ÆíÇØ¼­ ½Ì±ÛÅæÀ» ÀÚÁÖ ¾¸.
+    /// ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
+    /// - ë‹¤ë¥¸ ìŠ¤í¬ë¦½íŠ¸ì—ì„œ ì‰½ê²Œ ì ‘ê·¼ ê°€ëŠ¥.
+    /// - UIëŠ” ì „ì—­ì ìœ¼ë¡œ ì‚¬ìš©ë˜ë¯€ë¡œ ì‹±ê¸€í†¤ì´ ì í•©í•¨.
     /// </summary>
     public static UIManager Instance { get; private set; }
 
     /// <summary>
-    /// ÇÏ³ªÀÇ UI ÆäÀÌÁö(È­¸é) ´ÜÀ§¸¦ Ç¥Çö
-    /// - key: ¾î¶² È­¸éÀÎÁö ±¸ºĞÇÏ´Â ¿­°ÅÇü(¿¹: HUD, Pause, Loading)
-    /// - uxml: ÇØ´ç È­¸éÀÇ UXML ¿¡¼Â(VisualTreeAsset)
+    /// í•˜ë‚˜ì˜ UI í˜ì´ì§€(í™”ë©´)ë¥¼ ë‚˜íƒ€ëƒ„
+    /// - key: ì–´ë–¤ í™”ë©´ì¸ì§€ êµ¬ë¶„í•˜ëŠ” ì‹ë³„ì(ì˜ˆ: HUD, Pause, Loading)
+    /// - uxml: í•´ë‹¹ í™”ë©´ì˜ UXML íŒŒì¼(VisualTreeAsset)
     /// </summary>
     [System.Serializable]
     public class UIPage
     {
-        public UIKey key;               // ¾î¶² È­¸éÀÎÁö ½Äº° (enum ±ÇÀå: ¿ÀÅ¸ ¹æÁö/ÀÚµ¿¿Ï¼º/½ºÀ§Ä¡¹® À¯¸®)
-        public VisualTreeAsset uxml;    // ±× È­¸éÀÇ UXML(¿øº» ÅÛÇÃ¸´). CloneTree()·Î ÀÎ½ºÅÏ½ºÈ­ÇØ¼­ ¾¸.
+        public UIKey key;               // ì–´ë–¤ í™”ë©´ì¸ì§€ êµ¬ë¶„ (enum ì‚¬ìš©: íƒ€ì… ì•ˆì „ì„±/ì½”ë“œì™„ì„±/ì˜¤íƒ€ ë°©ì§€)
+        public VisualTreeAsset uxml;    // í•´ë‹¹ í™”ë©´ì˜ UXML(ì„¤ì • íŒŒì¼). CloneTree()ë¡œ ì¸ìŠ¤í„´ìŠ¤í™”í•´ì„œ ì‚¬ìš©.
     }
 
     [Header("References")]
-    public UIDocument uiDocument;       // ¾À¿¡ 1°³ Á¸ÀçÇÏ´Â UI ·çÆ®. ¿©±âÀÇ rootVisualElement ¾Æ·¡¿¡ ¸ğµç ÆäÀÌÁö¸¦ ºÙÀÎ´Ù.
-    public List<UIPage> pages = new();  // ÀÎ½ºÆåÅÍ¿¡¼­ µî·ÏÇÒ ÆäÀÌÁö ¸ñ·Ï. (ÇÊ¼ö ±¸¼º¿ä¼Ò)
+    public UIDocument uiDocument;       // ì”¬ì— 1ê°œë§Œ ì¡´ì¬í•˜ëŠ” UI ë£¨íŠ¸. ëª¨ë“  UIëŠ” rootVisualElement ì•„ë˜ì— ìì‹ìœ¼ë¡œ ë°°ì¹˜ë¨.
+    public List<UIPage> pages = new();  // ì¸ìŠ¤í™í„°ì—ì„œ ì„¤ì •í•  í˜ì´ì§€ ëª©ë¡. (í•„ìš”í•œ í™”ë©´ë“¤)
 
     /// <summary>
-    /// ½ÇÁ¦·Î ¾À¿¡ ºÙ¿©Áø ÆäÀÌÁö ÀÎ½ºÅÏ½º¸¦ º¸°üÇÏ´Â ¸Ê
-    /// - key: UIKey(È­¸é ½Äº°ÀÚ)
-    /// - value: ÇØ´ç È­¸éÀÇ ·çÆ® VisualElement(ÀÎ½ºÅÏ½º)
+    /// í˜ì´ì§€ í‚¤ì™€ ì‹¤ì œ ì¸ìŠ¤í„´ìŠ¤ëœ UIë¥¼ ë§¤í•‘í•˜ëŠ” ë”•ì…”ë„ˆë¦¬
+    /// - key: UIKey(í™”ë©´ êµ¬ë¶„ì)
+    /// - value: í•´ë‹¹ í™”ë©´ì˜ ë£¨íŠ¸ VisualElement(ì¸ìŠ¤í„´ìŠ¤)
     /// </summary>
     private Dictionary<UIKey, VisualElement> map = new();
 
     private void Awake()
     {
-        // ½Ì±ÛÅæ º¸Àå: ÀÌ¹Ì Á¸ÀçÇÏ¸é ÀÚ±â ÀÚ½Å ÆÄ±« (Áßº¹ »ı¼º ¹æÁö)
+        // ì‹±ê¸€í†¤ ì„¤ì •: ì´ë¯¸ ì¡´ì¬í•˜ë©´ ìì‹ ì„ íŒŒê´´ (ì¤‘ë³µ ë°©ì§€)
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
 
-        // ¾À ÀüÈ¯ ½Ã¿¡µµ »ì¾Æ³²°Ô ÇÔ. (UI Àü¿ª ÇãºêÀÌ¹Ç·Î À¯Áö°¡ ÆíÇÔ)
+        // ì”¬ ì „í™˜ ì‹œì—ë„ íŒŒê´´ë˜ì§€ ì•ŠìŒ. (UIëŠ” ì „ì—­ì ì´ë¯€ë¡œ ê³„ì† ìœ ì§€)
         DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        // UIDocument°¡ ºñ¾îÀÖ´Ù¸é °°Àº ¿ÀºêÁ§Æ®¿¡¼­ Ã£¾Æ¼­ ÂüÁ¶
+        // UIDocumentê°€ ì—†ìœ¼ë©´ ìë™ìœ¼ë¡œ ì°¾ì•„ì„œ ì„¤ì •
         if (uiDocument == null) uiDocument = GetComponent<UIDocument>();
 
-        // ½ÇÁ¦ UI Æ®¸®ÀÇ ·çÆ®. ¸ğµç ÆäÀÌÁö¸¦ ÀÌ ¹Ø¿¡ Ãß°¡(Add)ÇÑ´Ù.
+        // ëª¨ë“  UI íŠ¸ë¦¬ì˜ ë£¨íŠ¸. ì—¬ê¸°ì— ìì‹ë“¤ì„ ì¶”ê°€(Add)í•¨.
         var root = uiDocument.rootVisualElement;
 
-        // 1) µî·ÏµÈ ¸ğµç UXMLÀ» ÇÑ ¹ø¾¿ ÀÎ½ºÅÏ½ºÈ­(CloneTree)ÇØ¼­ Æ®¸®¿¡ ºÙÀÎ´Ù.
-        // 2) Ã³À½¿¡´Â º¸ÀÌÁö ¾Ê°Ô display=None Ã³¸®ÇÑ´Ù. (ÇÊ¿äÇÒ ¶§¸¸ ÄÑ±â)
-        // 3) ÀüÃ¼ È­¸é UI¶ó¸é StretchToParentSize()·Î ÆĞ³Î Å©±â¿¡ ¸ÂÃá´Ù.
+        // 1) ì„¤ì •ëœ ëª¨ë“  UXMLì„ ë¯¸ë¦¬ ì¸ìŠ¤í„´ìŠ¤í™”(CloneTree)í•´ì„œ íŠ¸ë¦¬ì— ë°°ì¹˜í•¨.
+        // 2) ì´ˆê¸°ì—ëŠ” ë³´ì´ì§€ ì•Šê²Œ display=None ì²˜ë¦¬í•¨. (í•„ìš”í•  ë•Œë§Œ í‘œì‹œ)
+        // 3) ì „ì²´ í™”ë©´ UIëŠ” StretchToParentSize()ë¡œ í™”ë©´ í¬ê¸°ì— ë§ì¶¤.
         foreach (var p in pages)
         {
-            if (p.uxml == null) { Debug.LogWarning($"UXML ¾øÀ½: {p.key}"); continue; }
+            if (p.uxml == null) { Debug.LogWarning($"UXML ëˆ„ë½: {p.key}"); continue; }
 
-            var ve = p.uxml.CloneTree();          // ÅÛÇÃ¸´(UXML) ¡æ ÀÎ½ºÅÏ½º(VisualElement) »ı¼º
-            ve.style.display = DisplayStyle.None;  // ÃÊ±â¿¡ ¼û±è Ã³¸®(ÀüÈ¯ ½Ã º¸ÀÌ°Ô ÇÔ)
-            ve.StretchToParentSize();              // È­¸é ²Ë Ã¤¿ì±â(Full-screen UI¿¡ ÀûÇÕ)
-            root.Add(ve);                          // ·çÆ®¿¡ Ãß°¡ ¡æ ÀÌÁ¦ ¾À¿¡¼­ ·»´õ¸µ ´ë»ó
+            var ve = p.uxml.CloneTree();          // í…œí”Œë¦¿(UXML)ì„ ì¸ìŠ¤í„´ìŠ¤(VisualElement)ë¡œ ë³€í™˜
+            ve.style.display = DisplayStyle.None;  // ì´ˆê¸°ì—ëŠ” ìˆ¨ê¹€ ì²˜ë¦¬(ì „í™˜ ì‹œ ê¹œë¹¡ì„ ë°©ì§€)
+            ve.StretchToParentSize();              // í™”ë©´ ì „ì²´ ì±„ì›€(Full-screen UIë¥¼ ìœ„í•´)
+            root.Add(ve);                          // ë£¨íŠ¸ì— ì¶”ê°€í•´ì„œ ê³„ì¸µ êµ¬ì¡° ì™„ì„±
 
-            map[p.key] = ve;                       // ³ªÁß¿¡ ºü¸£°Ô Á¢±ÙÇÏ±â À§ÇØ µñ¼Å³Ê¸®¿¡ º¸°ü
+            map[p.key] = ve;                       // í‚¤ì™€ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ë§¤í•‘í•´ì„œ ë‚˜ì¤‘ì— ì°¾ê¸° ì‰½ê²Œ ì €ì¥
         }
 
-        // GameState º¯°æ ÀÌº¥Æ® ±¸µ¶
-        // - °ÔÀÓ Èå¸§(ÇÃ·¹ÀÌ/ÀÏ½ÃÁ¤Áö/·Îµù µî)¿¡ µû¶ó ÀÚµ¿À¸·Î Æ¯Á¤ UI¸¦ ÄÑ°Å³ª ²ô°í ½ÍÀ» ¶§ Æí¸®
+        // GameState ë³€ê²½ ì´ë²¤íŠ¸ ì—°ê²°
+        // - ê²Œì„ ìƒíƒœ(í”Œë ˆì´/ì¼ì‹œì •ì§€/ë¡œë”© ë“±)ê°€ ë°”ë€Œë©´ íŠ¹ì • UIë¥¼ ë³´ì´ê±°ë‚˜ ìˆ¨ê¹€ ì²˜ë¦¬
         GameStateManager.Instance.OnGameStateChanged += HandleGameState;
     }
 
     private void OnDestroy()
     {
-        // ÀÌº¥Æ® ±¸µ¶ ÇØÁ¦(Áß¿ä): ¾ÀÀÌ ¹Ù²î°Å³ª ¿ÀºêÁ§Æ®°¡ ÆÄ±«µÉ ¶§, À¯·É ÂüÁ¶·Î ÀÎÇÑ Äİ¹é È£Ãâ ¹æÁö
+        // ì´ë²¤íŠ¸ ì—°ê²° í•´ì œ(ì¤‘ìš”): ê°ì²´ê°€ íŒŒê´´ë˜ê±°ë‚˜ ì”¬ì´ ë°”ë€Œë©´, ì´ë²¤íŠ¸ êµ¬ë…ì´ ë‚¨ì•„ìˆì–´ì„œ ì¤‘ë³µ í˜¸ì¶œ ë°©ì§€
         if (GameStateManager.Instance != null)
             GameStateManager.Instance.OnGameStateChanged -= HandleGameState;
     }
 
     /// <summary>
-    /// °ÔÀÓ »óÅÂ°¡ ¹Ù²ğ ¶§ ÀÚµ¿À¸·Î È£ÃâµÇ´Â ÇÚµé·¯
-    /// - ¿©±â¼­´Â ´ëÇ¥ ¿¹½Ã µÎ °¡Áö¸¸ Ã³¸®(Pause/Loading).
-    /// - ÇÁ·ÎÁ§Æ®°¡ Ä¿Áö¸é »óÅÂ¡æUI¸ñ·Ï ¸ÅÇÎ Å×ÀÌºí·Î ÀÏ¹İÈ­ÇÏ´Â °É ÃßÃµ.
+    /// ê²Œì„ ìƒíƒœê°€ ë°”ë€” ë•Œ í˜¸ì¶œë˜ëŠ” ì½œë°±
+    /// - ì—¬ê¸°ì„œëŠ” ê°„ë‹¨í•œ ìƒíƒœë³„ UI ì²˜ë¦¬(Pause/Loading).
+    /// - ë‹¤ë¥¸ ìŠ¤í¬ë¦½íŠ¸ì—ì„œë„ ì´ë²¤íŠ¸ë¥¼ êµ¬ë…í•´ì„œ UI ìƒíƒœë¥¼ ë™ê¸°í™”í•  ìˆ˜ ìˆìŒ.
     /// </summary>
     private void HandleGameState(GameState state)
     {
-        // ¿¹: Paused¸é Pause UI ON, ¾Æ´Ï¸é OFF
+        // ì˜ˆ: Pausedë©´ Pause UI ON, ì•„ë‹ˆë©´ OFF
         SetActive(UIKey.Pause, state == GameState.Paused);
 
-        // ¿¹: LoadingÀÌ¸é Loading UI ON, ¾Æ´Ï¸é OFF
+        // ì˜ˆ: Loadingì´ë©´ Loading UI ON, ì•„ë‹ˆë©´ OFF
         SetActive(UIKey.Loading, state == GameState.Loading);
     }
 
-    // --- ¿ÜºÎ¿¡¼­ ¾²´Â °ø°³ ¸Ş¼­µåµé ---
+    // --- ì™¸ë¶€ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ê³µê°œ ë©”ì„œë“œë“¤ ---
 
     /// <summary>
-    /// ÁöÁ¤ÇÑ ÆäÀÌÁö¸¦ ¿¬´Ù(º¸ÀÌ°Ô ¸¸µç´Ù).
-    /// ³»ºÎÀûÀ¸·Î SetActive(key, true) È£Ãâ.
+    /// íŠ¹ì • í˜ì´ì§€ë¥¼ ë³´ì´ê²Œ í•¨(í™”ë©´ì— í‘œì‹œ).
+    /// ë‚´ë¶€ì ìœ¼ë¡œëŠ” SetActive(key, true) í˜¸ì¶œ.
     /// </summary>
     public void Open(UIKey key) => SetActive(key, true);
 
     /// <summary>
-    /// ÁöÁ¤ÇÑ ÆäÀÌÁö¸¦ ´İ´Â´Ù(¼û±ä´Ù).
-    /// ³»ºÎÀûÀ¸·Î SetActive(key, false) È£Ãâ.
+    /// íŠ¹ì • í˜ì´ì§€ë¥¼ ìˆ¨ê¹€(í™”ë©´ì—ì„œ ì œê±°).
+    /// ë‚´ë¶€ì ìœ¼ë¡œëŠ” SetActive(key, false) í˜¸ì¶œ.
     /// </summary>
     public void Close(UIKey key) => SetActive(key, false);
 
     /// <summary>
-    /// ÇöÀç »óÅÂ¿Í ¹İ´ë·Î ÀüÈ¯ÇÑ´Ù.
-    /// - display°¡ NoneÀÌ¸é ¿­°í, ±×·¸Áö ¾ÊÀ¸¸é ´İ´Â´Ù.
-    /// - ¸Ş´º Åä±Û(¿¹: ESC·Î Pause ¿­°í ´İ±â)¿¡ À¯¿ë.
+    /// í˜„ì¬ ìƒíƒœë¥¼ ë°˜ì „ì‹œí‚´.
+    /// - displayê°€ Noneì´ë©´ ë³´ì„, ì•„ë‹ˆë©´ ìˆ¨ê¹€.
+    /// - ë©”ë‰´ í† ê¸€(ì˜ˆ: ESCë¡œ Pause ë©”ë‰´ ì—´ê¸°/ë‹«ê¸°)ì— ìœ ìš©.
     /// </summary>
     public void Toggle(UIKey key)
     {
         if (!map.TryGetValue(key, out var ve)) return;
 
-        // resolvedStyle: ·¹ÀÌ¾Æ¿ôÀÌ °è»êµÈ ½ÃÁ¡ÀÇ ÃÖÁ¾ °ª¿¡ Á¢±ÙÇÒ ¶§ »ç¿ë.
-        // ¿©±â¼­´Â ÇöÀç display°¡ NoneÀÎÁö È®ÀÎÇØ¼­ ¹İÀü ·ÎÁ÷¿¡ È°¿ë.
+        // resolvedStyle: ìŠ¤íƒ€ì¼ì‹œíŠ¸ê°€ ì ìš©ëœ í›„ì˜ ì‹¤ì œ ê³„ì‚°ëœ ìŠ¤íƒ€ì¼ ê°’ì„ ê°€ì ¸ì˜´.
+        // ì—¬ê¸°ì„œëŠ” í˜„ì¬ displayê°€ Noneì¸ì§€ í™•ì¸í•´ì„œ ë‹¤ìŒ ìƒíƒœë¥¼ ê²°ì •.
         bool willOpen = ve.resolvedStyle.display == DisplayStyle.None;
         SetActive(key, willOpen);
     }
 
     /// <summary>
-    /// Æ¯Á¤ ÆäÀÌÁö ¾È¿¡¼­ ÀÌ¸§À¸·Î ÀÚ½Ä ¿ä¼Ò¸¦ Ã£´Â´Ù.
-    /// - ¹öÆ°, ¶óº§ °°Àº ÄÁÆ®·ÑÀ» ¾ÈÀüÇÏ°Ô °¡Á®¿À´Â ¿ëµµ.
-    /// - ÆäÀÌÁö¸¶´Ù Æ®¸®°¡ ºĞ¸®µÇ¾î ÀÖ¾î name Ãæµ¹ °ÆÁ¤ÀÌ ÁÙ¾îµê.
+    /// íŠ¹ì • í˜ì´ì§€ ì•ˆì—ì„œ ì´ë¦„ìœ¼ë¡œ ìì‹ ìš”ì†Œë¥¼ ì°¾ìŒ.
+    /// - ë²„íŠ¼, í…ìŠ¤íŠ¸ ë“± ìì‹ìš”ì†Œë“¤ì„ ì°¾ì•„ì„œ ì´ë²¤íŠ¸ ì—°ê²°í•  ë•Œ ì‚¬ìš©.
+    /// - í˜ì´ì§€ê°€ íŠ¸ë¦¬ë¡œ êµ¬ì„±ë˜ì–´ ìˆì–´ì„œ name ë§¤ì¹­ìœ¼ë¡œ ì°¾ì„ ìˆ˜ ìˆìŒ.
     /// </summary>
     public T Q<T>(UIKey key, string name) where T : VisualElement
     {
         if (!map.TryGetValue(key, out var ve)) return null;
-        return ve.Q<T>(name); // UI ToolkitÀÇ Äõ¸® API. nameÀº UXMLÀÇ name ¼Ó¼º.
+        return ve.Q<T>(name); // UI Toolkitì˜ ë‚´ì¥ API. nameì€ UXMLì˜ name ì†ì„±.
     }
 
     /// <summary>
-    /// ³»ºÎ ÀüÈ¯ ÇÙ½É: display¸¦ Flex/NoneÀ¸·Î ¹Ù²ã¼­ º¸ÀÌ±â/¼û±â±â.
-    /// - È°¼ºÈ­ ½Ã BringToFront()·Î ½Ã°¢Àû ¿ì¼±¼øÀ§¸¦ ¿Ã·Á, °ãÄ¥ ¶§ ÃÖ»ó´Ü¿¡ ¿À°Ô ÇÔ.
-    /// - ¾Ö´Ï¸ŞÀÌ¼Ç/Æ®·£Áö¼ÇÀ» ¾²°í ½Í´Ù¸é, ¿©±â¼­ Å¬·¡½º Åä±Û(AddToClassList)·Î ÀüÈ¯ÇÏ´Â ÆĞÅÏµµ ÁÁÀ½.
+    /// í™”ë©´ ì „í™˜ í•µì‹¬: displayë¥¼ Flex/Noneìœ¼ë¡œ ë°”ê¿”ì„œ ë³´ì´ê¸°/ìˆ¨ê¸°ê¸°.
+    /// - í™œì„±í™” ì‹œ BringToFront()ë¡œ ìµœìƒìœ„ë¡œ ì˜¬ë¦¼, ë‹¤ë¥¸ UIë“¤ ìœ„ì— í‘œì‹œ.
+    /// - ì• ë‹ˆë©”ì´ì…˜/íŠ¸ëœì§€ì…˜ì„ ì›í•œë‹¤ë©´, ì—¬ê¸°ì„œ í´ë˜ìŠ¤ ì¶”ê°€(AddToClassList)ë¡œ ì „í™˜ íš¨ê³¼ êµ¬í˜„.
     /// </summary>
     private void SetActive(UIKey key, bool active)
     {
@@ -152,12 +152,12 @@ public class UIManager : MonoBehaviour
 
         if (active)
         {
-            // µ¿ÀÏ ·¹º§¿¡¼­ ¿©·¯ ÆäÀÌÁö°¡ °ãÄ¥ ¶§, ¿­¸®´Â ÆäÀÌÁö¸¦ ÃÖ»ó´ÜÀ¸·Î
+            // í™œì„±í™”ëœ í˜ì´ì§€ë¥¼ ìµœìƒìœ„ë¡œ ì˜¬ë ¤ì„œ ë‹¤ë¥¸ UIë“¤ ìœ„ì— í‘œì‹œ
             ve.BringToFront();
 
-            // (¼±ÅÃ) ÀüÈ¯ È¿°ú¸¦ ¾²°í ½Í´Ù¸é:
+            // (ì„ íƒì‚¬í•­) ì „í™˜ íš¨ê³¼ë¥¼ ì›í•œë‹¤ë©´:
             // ve.AddToClassList("ui-show"); ve.RemoveFromClassList("ui-hide");
-            // ¡æ USS¿¡¼­ .ui-show/.ui-hide¿¡ transition/opacity Á¤ÀÇ
+            // ê·¸ë¦¬ê³  USSì—ì„œ .ui-show/.ui-hideë¡œ transition/opacity ì„¤ì •
         }
     }
 }

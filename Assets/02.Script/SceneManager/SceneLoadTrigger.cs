@@ -1,47 +1,47 @@
 using UnityEngine;
 
 /// <summary>
-/// ÇÃ·¹ÀÌ¾î°¡ Æ¯Á¤ Æ®¸®°Å¿¡ µé¾î¿À¸é ÁöÁ¤µÈ ¾ÀÀ» Additive ¹æ½ÄÀ¸·Î ·ÎµåÇÏ°í,
-/// ·ÎµùÀÌ ¿Ï·áµÇ¸é ÀÔ±¸¸¦ ¿­¾îÁÖ´Â Æ®¸®°Å ½ºÅ©¸³Æ®ÀÔ´Ï´Ù.
+/// í”Œë ˆì´ì–´ê°€ íŠ¹ì • íŠ¸ë¦¬ê±°ì™€ ì¶©ëŒí–ˆì„ ë•Œ Additive ë°©ì‹ìœ¼ë¡œ ì”¬ì„ ë¡œë“œí•˜ê³ ,
+/// ë¡œë“œê°€ ì™„ë£Œë˜ë©´ ì…êµ¬ ê²Œì„ì˜¤ë¸Œì íŠ¸ë¥¼ í™œì„±í™”í•˜ëŠ” íŠ¸ë¦¬ê±°ì…ë‹ˆë‹¤.
 /// </summary>
 public class SceneLoadTrigger : MonoBehaviour
 {
-    // ·ÎµåÇÒ ´ë»ó ¾À ÀÌ¸§
+    // ë¡œë“œí•  ëŒ€ìƒ ì”¬ ì´ë¦„
     public string targetSceneName;
 
-    // ·Îµù ¿Ï·á ÈÄ ¿­¸± ÀÔ±¸ ¿ÀºêÁ§Æ® (¹®, Æ÷Å» µî)
+    // ë¡œë“œ ì™„ë£Œ í›„ í™œì„±í™”í•  ì…êµ¬ ê²Œì„ì˜¤ë¸Œì íŠ¸ (ì˜ˆ: ë¬¸, í¬íƒˆ ë“±)
     public GameObject entranceToActivate;
 
-    // Áßº¹ Æ®¸®°Å ¹æÁö¸¦ À§ÇÑ ÇÃ·¡±×
+    // ì¤‘ë³µ íŠ¸ë¦¬ê±° ë°©ì§€ë¥¼ ìœ„í•œ í”Œë˜ê·¸
     private bool triggered = false;
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î°¡ Æ®¸®°Å¿¡ ÁøÀÔÇßÀ» ¶§ È£ÃâµË´Ï´Ù.
+    /// í”Œë ˆì´ì–´ê°€ íŠ¸ë¦¬ê±°ì™€ ì¶©ëŒí–ˆì„ ë•Œ í˜¸ì¶œë©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="other">Æ®¸®°Å¿¡ ÁøÀÔÇÑ Collider</param>
+    /// <param name="other">íŠ¸ë¦¬ê±°ì™€ ì¶©ëŒí•œ Collider</param>
     private void OnTriggerEnter(Collider other)
     {
-        // ÀÌ¹Ì ÇÑ ¹ø Æ®¸®°ÅµÇ¾úÀ¸¸é ¹«½Ã
+        // ì´ë¯¸ í•œ ë²ˆ íŠ¸ë¦¬ê±°ë˜ì—ˆë‹¤ë©´ ì¢…ë£Œ
         if (triggered) return;
 
-        // Ãæµ¹ÇÑ °´Ã¼°¡ "Player" ÅÂ±×°¡ ¾Æ´Ï¸é ¹«½Ã
+        // ì¶©ëŒí•œ ê°ì²´ê°€ "Player" íƒœê·¸ê°€ ì•„ë‹ˆë©´ ì¢…ë£Œ
         if (!other.CompareTag("Player")) return;
 
-        // Æ®¸®°Å ½ÇÇà ÇÃ·¡±× ¼³Á¤
+        // íŠ¸ë¦¬ê±° ìƒíƒœ í”Œë˜ê·¸ ì„¤ì •
         triggered = true;
 
-        // SceneLoaderÀÇ LoadSceneAdditive ÇÔ¼ö È£Ãâ
-        // - ¾À ÀÌ¸§°ú ·Îµù ¿Ï·á ÈÄ ½ÇÇàÇÒ Äİ¹éÀ» Àü´Ş
+        // SceneLoaderì˜ LoadSceneAdditive í•¨ìˆ˜ í˜¸ì¶œ
+        // - ì”¬ ì´ë¦„ì„ ë°›ì•„ ë¡œë“œ ì™„ë£Œ í›„ ì½œë°±ì„ ì‹¤í–‰
         SceneLoader.Instance.LoadSceneAdditive(targetSceneName, () =>
         {
             Debug.Log("Scene loaded, opening entrance...");
 
-            // ÀÔ±¸ ¿ÀºêÁ§Æ®°¡ ¼³Á¤µÇ¾î ÀÖ´Ù¸é È°¼ºÈ­
+            // ì…êµ¬ ê²Œì„ì˜¤ë¸Œì íŠ¸ê°€ ì„¤ì •ë˜ì–´ ìˆë‹¤ë©´ í™œì„±í™”
             if (entranceToActivate != null)
             {
                 entranceToActivate.SetActive(true);
 
-                //// Animator°¡ ÀÖ´Ù¸é "Open" Æ®¸®°Å ¹ßµ¿ (¿¹: ¹® ¿­±â ¾Ö´Ï¸ŞÀÌ¼Ç)
+                //// Animatorê°€ ìˆë‹¤ë©´ "Open" íŠ¸ë¦¬ê±°ë¥¼ ë°œìƒ (ì˜ˆ: ë¬¸ ì—´ê¸° ì• ë‹ˆë©”ì´ì…˜)
                 Animator anim = entranceToActivate.GetComponent<Animator>();
                 if (anim != null)
                 {

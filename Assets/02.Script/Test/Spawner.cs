@@ -1,50 +1,52 @@
 using UnityEngine;
 
-// ÀÌ ½ºÅ©¸³Æ®´Â °ÔÀÓÀÌ ½ÃÀÛµÉ ¶§ ¼³Á¤µÈ À§Ä¡¿¡ ¿©·¯ °³ÀÇ ¿ÀºêÁ§Æ®¸¦ »ý¼ºÇÏ´Â ±â´ÉÀ» ÇÕ´Ï´Ù.
+/// <summary>
+/// ì´ ìŠ¤í¬ë¦½íŠ¸ëŠ” ì„¤ì •ëœ ìŠ¤í° í¬ì¸íŠ¸ì—ì„œ ì§€ì •ëœ ê°œìˆ˜ë§Œí¼ ê²Œìž„ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì„±í•˜ëŠ” ìŠ¤í¬ë„ˆìž…ë‹ˆë‹¤.
+/// </summary>
 public class Spawner : MonoBehaviour
 {
-    // »ý¼ºÇÒ ´ë»ó ÇÁ¸®ÆÕÀ» ¿¡µðÅÍ¿¡¼­ ÇÒ´çÇÕ´Ï´Ù.
+    // ìƒì„±í•  ëª¨ë“  ê²Œìž„ì˜¤ë¸Œì íŠ¸ì˜ í”„ë¦¬íŒ¹ì„ í• ë‹¹í•©ë‹ˆë‹¤.
     public GameObject entityToSpawn;
 
-    // SpawnManagerScriptableObject ¿¡¼ÂÀ» ÂüÁ¶ÇÕ´Ï´Ù.
-    // ÀÌ ¿¡¼Â¿¡´Â ÇÁ¸®ÆÕ ÀÌ¸§, »ý¼º °³¼ö, À§Ä¡ Á¤º¸(spawn points)°¡ ÀúÀåµÇ¾î ÀÖ½À´Ï´Ù.
+    // SpawnManagerScriptableObject ì—ì…‹ì„ í• ë‹¹í•©ë‹ˆë‹¤.
+    // ì´ ì—ì…‹ì—ëŠ” í”„ë¦¬íŒ¹ ì´ë¦„, ìƒì„± ê°œìˆ˜, ìœ„ì¹˜ ì •ë³´(spawn points)ê°€ ì„¤ì •ë˜ì–´ ìžˆìŠµë‹ˆë‹¤.
     public SpawnManagerScriptableObject spawnManagerValues;
 
-    // »ý¼ºµÇ´Â ¿ÀºêÁ§Æ® ÀÌ¸§¿¡ ºÙÀÏ ÀÏ·Ã¹øÈ£ÀÔ´Ï´Ù.
+    // ìƒì„±ë˜ëŠ” ê²Œìž„ì˜¤ë¸Œì íŠ¸ ì´ë¦„ì— ë¶™ì¼ ì¼ë ¨ë²ˆí˜¸ìž…ë‹ˆë‹¤.
     int instanceNumber = 1;
 
-    // °ÔÀÓ ½ÃÀÛ ½Ã ÀÚµ¿À¸·Î È£ÃâµÇ´Â ÇÔ¼öÀÔ´Ï´Ù.
+    // ê²Œìž„ ì‹œìž‘ ì‹œ ìžë™ìœ¼ë¡œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜ìž…ë‹ˆë‹¤.
     void Start()
     {
-        // ¿ÀºêÁ§Æ®µéÀ» »ý¼ºÇÕ´Ï´Ù.
+        // ê²Œìž„ì˜¤ë¸Œì íŠ¸ë“¤ì„ ìƒì„±í•©ë‹ˆë‹¤.
         SpawnEntities();
     }
 
-    // ¿ÀºêÁ§Æ®¸¦ ¼øÂ÷ÀûÀ¸·Î »ý¼ºÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
+    // ê²Œìž„ì˜¤ë¸Œì íŠ¸ë¥¼ ì„¤ì •ëœ ìœ„ì¹˜ì— ìƒì„±í•˜ëŠ” í•¨ìˆ˜ìž…ë‹ˆë‹¤.
     void SpawnEntities()
     {
-        // ÇöÀç »ç¿ëÇÒ spawn pointÀÇ ÀÎµ¦½º¸¦ ÀúÀåÇÏ´Â º¯¼öÀÔ´Ï´Ù.
+        // í˜„ìž¬ ì‚¬ìš©í•  spawn pointì˜ ì¸ë±ìŠ¤ë¥¼ ì¶”ì í•©ë‹ˆë‹¤.
         int currentSpawnPointIndex = 0;
 
-        // ScriptableObject¿¡¼­ ¼³Á¤ÇÑ »ý¼º °³¼ö¸¸Å­ ¹Ýº¹ÇÕ´Ï´Ù.
+        // ScriptableObjectì—ì„œ ì„¤ì •ëœ ìƒì„± ê°œìˆ˜ë§Œí¼ ë°˜ë³µí•©ë‹ˆë‹¤.
         for (int i = 0; i < spawnManagerValues.numberOfPrefabsToCreate; i++)
         {
-            // ÁöÁ¤µÈ À§Ä¡(spawn point)¿¡ ÇÁ¸®ÆÕÀ» ÇÏ³ª »ý¼ºÇÕ´Ï´Ù.
+            // ì„¤ì •ëœ ìœ„ì¹˜(spawn point)ì—ì„œ í”„ë¦¬íŒ¹ì„ í•˜ë‚˜ ìƒì„±í•©ë‹ˆë‹¤.
             GameObject currentEntity = Instantiate(
                 entityToSpawn,
                 spawnManagerValues.spawnPoints[currentSpawnPointIndex],
-                Quaternion.identity // È¸Àü°ªÀº ±âº»°ªÀ¸·Î ¼³Á¤ (0,0,0)
+                Quaternion.identity // íšŒì „ê°’ì„ ê¸°ë³¸ê°’ìœ¼ë¡œ ì„¤ì • (0,0,0)
             );
 
-            // »ý¼ºµÈ ¿ÀºêÁ§Æ®ÀÇ ÀÌ¸§À» ScriptableObject¿¡ ÁöÁ¤µÈ ÀÌ¸§ + °íÀ¯ ¹øÈ£·Î ¼³Á¤ÇÕ´Ï´Ù.
-            // ¿¹: "Enemy1", "Enemy2", "Enemy3" ...
+            // ìƒì„±ëœ ê²Œìž„ì˜¤ë¸Œì íŠ¸ì˜ ì´ë¦„ì„ ScriptableObjectì˜ í”„ë¦¬íŒ¹ ì´ë¦„ + ì¼ë ¨ ë²ˆí˜¸ë¡œ ì„¤ì •í•©ë‹ˆë‹¤.
+            // ì˜ˆ: "Enemy1", "Enemy2", "Enemy3" ...
             currentEntity.name = spawnManagerValues.prefabName + instanceNumber;
 
-            // ´ÙÀ½ spawn point ÀÎµ¦½º·Î ÀÌµ¿ÇÕ´Ï´Ù.
-            // ÀÎµ¦½º°¡ ¹è¿­ÀÇ ±æÀÌ¸¦ ³ÑÀ¸¸é Ã³À½À¸·Î µÇµ¹¾Æ°©´Ï´Ù (¼øÈ¯ ±¸Á¶).
+            // ë‹¤ìŒ spawn point ì¸ë±ìŠ¤ë¡œ ì´ë™í•©ë‹ˆë‹¤.
+            // ì¸ë±ìŠ¤ê°€ ë°°ì—´ì˜ ëì— ë„ë‹¬í•˜ë©´ ì²˜ìŒìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤ (ìˆœí™˜ ë°©ì‹).
             currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnManagerValues.spawnPoints.Length;
 
-            // °íÀ¯ ¹øÈ£ Áõ°¡
+            // ì¼ë ¨ ë²ˆí˜¸ ì¦ê°€
             instanceNumber++;
         }
     }

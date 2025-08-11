@@ -1,20 +1,22 @@
 using UnityEngine;
 
-// Unity ¿¡µğÅÍ¿¡¼­ ScriptableObject ¿¡¼ÂÀ» »ı¼ºÇÒ ¼ö ÀÖ°Ô ÇØÁÖ´Â ¼Ó¼º(Attribute)ÀÔ´Ï´Ù.
-// "Create > ScriptableObjects > SpawnManagerScriptableObject" °æ·Î·Î »ı¼ºÇÒ ¼ö ÀÖ½À´Ï´Ù.
+/// <summary>
+/// Unity ì—ë””í„°ì—ì„œ ScriptableObject ì—ì…‹ì„ ìƒì„±í•  ìˆ˜ ìˆê²Œ í•´ì£¼ëŠ” ì†ì„±(Attribute)ì…ë‹ˆë‹¤.
+/// "Create > ScriptableObjects > SpawnManagerScriptableObject" ë©”ë‰´ë¡œ ìƒì„±í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+/// </summary>
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SpawnManagerScriptableObject", order = 1)]
 public class SpawnManagerScriptableObject : ScriptableObject
 {
-    // »ı¼ºÇÒ ÇÁ¸®ÆÕÀÇ ÀÌ¸§ÀÔ´Ï´Ù.
-    // ¿¹: "Enemy", "Tree" µîÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¿© Resources Æú´õ¿¡¼­ ÇØ´ç ÇÁ¸®ÆÕÀ» ºÒ·¯¿Ã ¼ö ÀÖ½À´Ï´Ù.
+    // ìƒì„±í•  í”„ë¦¬íŒ¹ì˜ ì´ë¦„ì…ë‹ˆë‹¤.
+    // ì˜ˆ: "Enemy", "Tree" ê°™ì€ ì´ë¦„ì„ ì…ë ¥í•˜ë©´ Resources í´ë”ì—ì„œ í•´ë‹¹ í”„ë¦¬íŒ¹ì„ ì°¾ì„ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
     public string prefabName;
 
-    // »ı¼ºÇÒ ÇÁ¸®ÆÕÀÇ °³¼öÀÔ´Ï´Ù.
-    // ¿¹: 5¸¦ ÀÔ·ÂÇÏ¸é ÇÁ¸®ÆÕÀÌ 5°³ »ı¼ºµË´Ï´Ù.
+    // ìƒì„±í•  í”„ë¦¬íŒ¹ì˜ ê°œìˆ˜ì…ë‹ˆë‹¤.
+    // ì˜ˆ: 5ë¥¼ ì…ë ¥í•˜ë©´ í”„ë¦¬íŒ¹ì„ 5ê°œ ìƒì„±í•©ë‹ˆë‹¤.
     public int numberOfPrefabsToCreate;
 
-    // °¢ ÇÁ¸®ÆÕÀÌ »ı¼ºµÉ À§Ä¡¸¦ ´ã°í ÀÖ´Â ¹è¿­ÀÔ´Ï´Ù.
-    // ¿¹: [ (0,0,0), (1,0,0), (2,0,0) ] ÀÌ·± ½ÄÀ¸·Î À§Ä¡¸¦ ÁöÁ¤ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+    // ê° í”„ë¦¬íŒ¹ì´ ìƒì„±ë  ìœ„ì¹˜ë¥¼ ë‹´ê³  ìˆëŠ” ë°°ì—´ì…ë‹ˆë‹¤.
+    // ì˜ˆ: [ (0,0,0), (1,0,0), (2,0,0) ] ì´ëŸ° ì‹ìœ¼ë¡œ ìƒì„±ë  ìœ„ì¹˜ë¥¼ ì„¤ì •í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
     public Vector3[] spawnPoints;
 }
 

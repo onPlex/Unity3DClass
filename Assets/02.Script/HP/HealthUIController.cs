@@ -1,22 +1,27 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+
+/// <summary>
+/// ì²´ë ¥ UIë¥¼ ì œì–´í•˜ëŠ” ì»¨íŠ¸ë¡¤ëŸ¬
+/// - UXML ê¸°ë°˜ì˜ UI Toolkitì„ ì‚¬ìš©í•˜ì—¬ ì²´ë ¥ë°”ë¥¼ ì—…ë°ì´íŠ¸
+/// </summary>
 public class HealthUIController : MonoBehaviour
 {
-    public PlayerHP playerHP; // ScriptableObject ÂüÁ¶
+    public PlayerHP playerHP; // ScriptableObject ì°¸ì¡°
     private ProgressBar hpBar;
 
     private void OnEnable()
     {
-        // UI Document °¡Á®¿À±â
+        // UI Document ë£¨íŠ¸ ìš”ì†Œ ê°€ì ¸ì˜¤ê¸°
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        // UXML¿¡¼­ name="hp-bar"·Î ÁöÁ¤ÇÑ ProgressBar Ã£±â
+        // UXMLì—ì„œ name="hp-bar"ì¸ ProgressBar ì°¾ê¸°
         hpBar = root.Q<ProgressBar>("hp-bar");
     }
 
     private void Update()
     {
-        // Ã¼·Â °»½Å (½Ç½Ã°£ ¹İ¿µ)
+        // ì²´ë ¥ ì—…ë°ì´íŠ¸ (ì‹¤ì‹œê°„ ë°˜ì˜)
         hpBar.value = playerHP.currentHP;
         hpBar.highValue = playerHP.maxHP;
     }

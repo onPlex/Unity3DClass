@@ -1,10 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// ë¬´ê¸° ìŠ¤íƒ¯ ë°ì´í„°ë¥¼ ê·¸ë£¹ìœ¼ë¡œ ê´€ë¦¬í•˜ëŠ” ScriptableObject
+/// - ì—¬ëŸ¬ ë¬´ê¸°ì˜ ìŠ¤íƒ¯ ì •ë³´ë¥¼ í•˜ë‚˜ì˜ ì—ì…‹ì— ì €ì¥
+/// </summary>
 [CreateAssetMenu(fileName = "NewWeaponGroup", menuName = "ScriptableObjects/GameData/WeaponStatsList", order = 3)]
 public class WeaponStatsList : ScriptableObject
 {
-    // ¿©·¯ °³ÀÇ ¹«±â µ¥ÀÌÅÍ¸¦ ÇÑ ¹ø¿¡ °ü¸®
+    // ì—¬ëŸ¬ ë¬´ê¸° ìŠ¤íƒ¯ ë°ì´í„°ë¥¼ ë‹´ëŠ” ë¦¬ìŠ¤íŠ¸
     public List<WeaponStats> weapons = new List<WeaponStats>();
 }
 
