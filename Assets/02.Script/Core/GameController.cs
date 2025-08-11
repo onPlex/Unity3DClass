@@ -139,7 +139,7 @@ public class GameController : MonoBehaviour
     }
 
     /// <summary>
-    /// 플레이어 입력을 일시정지/재개에 맞게 제한 (쉬운 버전)
+    /// 플레이어 입력을 일시정지/재개에 맞게 제한
     /// - PlayerInput 액션맵 전환 또는 Enable/Disable
     /// - 선택된 이동/조작 컴포넌트 비활성화 처리
     /// </summary>
